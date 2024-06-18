@@ -10,7 +10,7 @@ int main() {
     InitWindow(screen_size.x, screen_size.y, "Rouge-dream");
     Player player;
     Camera2D camera = {0};
-    camera.zoom     = 1.0f;
+    camera.zoom     = 0.25f;
     camera.offset   = {.x = 350, .y = 350};
 
     SetTargetFPS(120);
@@ -22,7 +22,7 @@ int main() {
         ClearBackground(GetColor(0x181818ff));
         DrawFPS(10, 10);
         BeginMode2D(camera);
-        player.Draw();
+        player.Draw(camera);
         DrawRectangleV({200, 200}, {100, 100},
                        BLUE); // A reference point for movement
         EndMode2D();
