@@ -1,13 +1,14 @@
 #pragma once
 
+#include <memory>
 #include <raylib.h>
 
 class Bullet {
 public:
     Bullet(Vector2 player_center, Vector2 size, Vector2 rotation, float speed,
-           float ttl, const Camera2D& camera);
-    void Update(const Camera2D& camera);
-    void Draw(const Camera2D& camera) const;
+           float ttl, std::shared_ptr<Camera2D> camera);
+    void Update();
+    void Draw() const;
 
 public:
     float ttl;
@@ -15,4 +16,5 @@ public:
 private:
     Vector2 m_pos, m_size, m_rotation;
     float m_speed, m_angle;
+    std::shared_ptr<Camera2D> m_camera;
 };

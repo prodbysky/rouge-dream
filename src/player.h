@@ -2,18 +2,19 @@
 
 #include "bullet.h"
 
+#include <memory>
 #include <raylib.h>
 #include <raymath.h>
 #include <vector>
 
 class Player {
 public:
-    Player();
+    Player(std::shared_ptr<Camera2D> camera);
 
 public:
-    void Update(const Camera2D& camera);
+    void Update();
 
-    void Draw(const Camera2D& camera) const;
+    void Draw() const;
 
     const Vector2& GetPos() const;
     const Vector2& GetSize() const;
@@ -21,10 +22,11 @@ public:
     Vector2 GetCenter() const;
 
 private:
-    void Movement(const Camera2D& camera);
-    void Fire(const Camera2D& camera);
-    static constexpr float m_speed = 500.0f;
+    void Movement();
+    void Fire();
+    static constexpr float m_speed = 1000.0f;
     Vector2 m_pos;
     Vector2 m_size;
     std::vector<Bullet> bullets;
+    std::shared_ptr<Camera2D> m_camera;
 };
