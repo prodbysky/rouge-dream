@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(include/)
 
 add_executable(game src/main.cpp 
+    src/weapon.cpp
     src/bullet.cpp 
     src/player.cpp 
     src/utils.cpp)

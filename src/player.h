@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bullet.h"
+#include "weapon.h"
 
 #include <memory>
 #include <raylib.h>
@@ -23,10 +24,9 @@ public:
 
 private:
     void Movement();
-    void Fire();
     static constexpr float m_speed = 1000.0f;
     Vector2 m_pos;
     Vector2 m_size;
-    std::vector<Bullet> bullets;
+    Weapon m_weapon;
     std::shared_ptr<Camera2D> m_camera;
 };

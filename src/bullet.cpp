@@ -6,13 +6,14 @@
 #include <memory>
 #include <raymath.h>
 
-Bullet::Bullet(Vector2 player_center, Vector2 size, Vector2 rotation,
-               float speed, float ttl, std::shared_ptr<Camera2D> camera) :
-    m_size(size), m_rotation(rotation), m_speed(speed), ttl(ttl) {
-    m_camera = camera;
-    m_pos    = Vector2Add(player_center,
-                          Vector2Scale(rotation, speed * GetFrameTime()));
-    m_angle  = CenterMouseAngle(m_pos, *m_camera);
+Bullet::Bullet(Vector2 player_center, float angle, BulletConfig config,
+               std::shared_ptr<Camera2D> camera) :
+    m_size(config.size), m_speed(config.speed), ttl(config.ttl) {
+    m_camera         = camera;
+    Vector2 rotation = Vector2Rotate({1, 1}, angle);
+    m_pos            = Vector2Add(player_center,
+                                  Vector2Scale(rotation, m_speed * GetFrameTime()));
+    m_angle          = CenterMouseAngle(m_pos, *m_camera);
 }
 
 void Bullet::Update() {

@@ -7,31 +7,24 @@
 #include <raymath.h>
 
 Player::Player(std::shared_ptr<Camera2D> camera) :
-    m_pos({.x = 350, .y = 350}), m_size({.x = 100, .y = 100}) {
-    this->m_camera = camera;
+    m_pos({
+        .x = 350, .y = 350
+}),
+    m_size({.x = 100, .y = 100}), m_camera(camera),
+    m_weapon({-1, -1, {0, 0}}, nullptr) {
+    m_weapon = Weapon(
+        {
+            1000, 2, {100, 50}
+    },
+        m_camera);
 }
 
 void Player::Update() {
     Movement();
-
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        Fire();
+        m_weapon.Shoot(CenterMouseAngle(GetCenter(), *m_camera), GetCenter());
     }
-
-    for (size_t i = 0; i < bullets.size(); i++) {
-        if (bullets[i].ttl <= 0) {
-            bullets.erase(bullets.begin() + i);
-        }
-
-        bullets[i].Update();
-    }
-}
-
-void Player::Fire() {
-    Vector2 rotation = Vector2Normalize(Vector2Rotate(
-        {1, 1}, DEG2RAD * CenterMouseAngle(GetCenter(), *m_camera)));
-    bullets.push_back(
-        Bullet(GetCenter(), {100, 50}, rotation, 2000, 0.5, m_camera));
+    m_weapon.Update();
 }
 
 void Player::Movement() {
@@ -60,9 +53,7 @@ void Player::Movement() {
 
 void Player::Draw() const {
     DrawCircleV(GetCenter(), 100, RED);
-    for (const auto& bullet : bullets) {
-        bullet.Draw();
-    }
+    m_weapon.Draw();
 }
 
 const Vector2& Player::GetPos() const { return m_pos; }
