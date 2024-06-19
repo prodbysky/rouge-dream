@@ -3,9 +3,9 @@
 
 ## Quick start
 ```console
-    $ mkdir build && cd build
-    $ cmake .. 
-    $ make
-    $ ./game
+ $ mkdir build && cd build
+ $ cmake .. 
+ $ make
+ $ ./game
 ```
 
