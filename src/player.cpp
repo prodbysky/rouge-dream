@@ -53,10 +53,8 @@ void Player::Movement() {
         angle += 180;
     }
 
-    Vector2 rotation_angle =
-        Vector2Normalize(Vector2Rotate({1, 1}, DEG2RAD * angle));
     if (key_down) {
-        m_pos = Vector2Add(m_pos, Vector2Scale(rotation_angle, speed));
+        m_pos = Vector2MoveToAngle(m_pos, angle, {speed, speed});
     }
 }
 

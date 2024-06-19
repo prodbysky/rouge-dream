@@ -24,8 +24,7 @@ int main() {
         DrawFPS(10, 10);
         BeginMode2D(*camera);
         player.Draw();
-        DrawRectangleV({200, 200}, {100, 100},
-                       BLUE); // A reference point for movement
+        DrawRectangleV({400, 400}, {100, 100}, GREEN);
         EndMode2D();
         EndDrawing();
     }

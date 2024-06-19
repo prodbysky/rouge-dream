@@ -1,5 +1,6 @@
 #include "bullet.h"
 
+#include "raylib.h"
 #include "utils.h"
 
 #include <memory>
@@ -15,9 +16,9 @@ Bullet::Bullet(Vector2 player_center, Vector2 size, Vector2 rotation,
 }
 
 void Bullet::Update() {
-    m_pos =
-        Vector2Add(m_pos, Vector2Scale(m_rotation, m_speed * GetFrameTime()));
-    ttl -= GetFrameTime();
+    float speed  = m_speed * GetFrameTime();
+    m_pos        = Vector2MoveToAngle(m_pos, m_angle, {speed, speed});
+    ttl         -= GetFrameTime();
 }
 
 void Bullet::Draw() const {
