@@ -29,10 +29,3 @@ int main() {
         EndDrawing();
     }
 }
-
-/*
-    Enemies
-    Pickups (weapons)
-    UI (Health, Mana)
-    Graphics :O
-*/
