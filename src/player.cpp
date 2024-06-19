@@ -11,17 +11,17 @@ Player::Player(std::shared_ptr<Camera2D> camera) :
         .x = 350, .y = 350
 }),
     m_size({.x = 100, .y = 100}), m_camera(camera),
-    m_weapon({-1, -1, {0, 0}}, nullptr) {
+    m_weapon({-1, -1, {0, 0}}, 0, nullptr) {
     m_weapon = Weapon(
         {
             1000, 2, {100, 50}
     },
-        m_camera);
+        0.25, m_camera);
 }
 
 void Player::Update() {
     Movement();
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
         m_weapon.Shoot(CenterMouseAngle(GetCenter(), *m_camera), GetCenter());
     }
     m_weapon.Update();

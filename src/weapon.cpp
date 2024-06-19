@@ -1,10 +1,14 @@
 #include "weapon.h"
 
-Weapon::Weapon(BulletConfig config, std::shared_ptr<Camera2D> camera) :
-    m_config(config), m_camera(camera) {}
+Weapon::Weapon(BulletConfig config, float reload_time,
+               std::shared_ptr<Camera2D> camera) :
+    m_config(config), m_camera(camera), m_reload_time(reload_time) {}
 
 void Weapon::Shoot(float angle, Vector2 pos) {
-    m_bullets.push_back(Bullet(pos, angle, m_config, m_camera));
+    if (m_reload_timer <= 0) {
+        m_bullets.push_back(Bullet(pos, angle, m_config, m_camera));
+        m_reload_timer = m_reload_time;
+    }
 }
 
 void Weapon::Update() {
@@ -16,6 +20,7 @@ void Weapon::Update() {
 
         bullet.Update();
     }
+    m_reload_timer -= GetFrameTime();
 }
 
 void Weapon::Draw() const {
