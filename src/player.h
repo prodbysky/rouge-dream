@@ -17,16 +17,15 @@ public:
 
     void Draw() const;
 
-    const Vector2& GetPos() const;
-    const Vector2& GetSize() const;
+    Vector2 GetPos() const;
+    Vector2 GetSize() const;
 
     Vector2 GetCenter() const;
 
 private:
     void Movement();
     static constexpr float m_speed = 1000.0f;
-    Vector2 m_pos;
-    Vector2 m_size;
+    Rectangle m_rect;
     Weapon m_weapon;
     std::shared_ptr<Camera2D> m_camera;
 };

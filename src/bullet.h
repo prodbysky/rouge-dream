@@ -15,12 +15,14 @@ public:
            std::shared_ptr<Camera2D> camera);
     void Update();
     void Draw() const;
+    Vector2 GetPos() const;
+    Vector2 GetSize() const;
 
 public:
     float ttl;
 
 private:
-    Vector2 m_pos, m_size;
+    Rectangle m_rect;
     float m_angle, m_speed;
     std::shared_ptr<Camera2D> m_camera;
 };

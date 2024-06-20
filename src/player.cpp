@@ -7,11 +7,10 @@
 #include <raymath.h>
 
 Player::Player(std::shared_ptr<Camera2D> camera) :
-    m_pos({
-        .x = 350, .y = 350
+    m_rect({
+        .x = 350, .y = 350, .width = 100, .height = 100
 }),
-    m_size({.x = 100, .y = 100}), m_camera(camera),
-    m_weapon({-1, -1, {0, 0}}, 0, nullptr) {
+    m_camera(camera), m_weapon({-1, -1, {0, 0}}, 0, nullptr) {
     m_weapon = Weapon(
         {
             1000, 2, {100, 50}
@@ -47,7 +46,10 @@ void Player::Movement() {
     }
 
     if (key_down) {
-        m_pos = Vector2MoveToAngle(m_pos, angle, {speed, speed});
+        Vector2 new_pos = Vector2MoveToAngle({.x = m_rect.x, .y = m_rect.y},
+                                             angle, {speed, speed});
+        m_rect.x        = new_pos.x;
+        m_rect.y        = new_pos.y;
     }
 }
 
@@ -56,9 +58,9 @@ void Player::Draw() const {
     m_weapon.Draw();
 }
 
-const Vector2& Player::GetPos() const { return m_pos; }
-const Vector2& Player::GetSize() const { return m_size; }
+Vector2 Player::GetPos() const { return {m_rect.x, m_rect.y}; }
+Vector2 Player::GetSize() const { return {m_rect.width, m_rect.height}; }
 
 Vector2 Player::GetCenter() const {
-    return Vector2Add(m_pos, Vector2Divide(m_size, {2, 2}));
+    return Vector2Add(GetPos(), Vector2Divide(GetSize(), {2, 2}));
 }
