@@ -6,7 +6,7 @@ Weapon::Weapon(BulletConfig config, float reload_time,
 
 void Weapon::Shoot(float angle, Vector2 pos) {
     if (m_reload_timer <= 0) {
-        m_bullets.push_back(Bullet(pos, angle, m_config, m_camera));
+        m_bullets.emplace_back(Bullet(pos, angle, m_config, m_camera));
         m_reload_timer = m_reload_time;
     }
 }
