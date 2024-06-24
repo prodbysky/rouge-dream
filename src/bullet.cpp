@@ -17,7 +17,6 @@ Bullet::Bullet(Vector2 player_center, float angle, BulletConfig config,
     m_rect.x         = pos.x;
     m_rect.y         = pos.y;
     m_angle          = CenterMouseAngle(GetPos(), *m_camera);
-    m_texture        = GetTexture();
 }
 
 void Bullet::Update() {
@@ -29,16 +28,8 @@ void Bullet::Update() {
 }
 
 void Bullet::Draw() const {
-    DrawTexturePro(m_texture, {0, 0, m_rect.width, m_rect.height}, m_rect,
-                   {m_rect.width / 2, m_rect.height / 2}, m_angle + 45, WHITE);
-}
-
-Texture2D Bullet::GetTexture() {
-    if (m_texture.height == 0) {
-        m_texture = LoadTexture("../assets/bullet.png");
-    }
-
-    return m_texture;
+    DrawRectanglePro(m_rect, {m_rect.width / 2, m_rect.height / 2},
+                     m_angle + 45, YELLOW);
 }
 
 Vector2 Bullet::GetPos() const { return {m_rect.x, m_rect.y}; }
