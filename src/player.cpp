@@ -60,7 +60,9 @@ void Player::Draw() const {
 
 Vector2 Player::GetPos() const { return {m_rect.x, m_rect.y}; }
 Vector2 Player::GetSize() const { return {m_rect.width, m_rect.height}; }
-
 Vector2 Player::GetCenter() const {
     return Vector2Add(GetPos(), Vector2Divide(GetSize(), {2, 2}));
 }
+Rectangle Player::GetRect() const { return m_rect; }
+
+void Player::SetWeapon(Weapon w) { m_weapon = w; }

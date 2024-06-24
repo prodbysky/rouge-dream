@@ -17,10 +17,12 @@ public:
 
     void Draw() const;
 
+    Rectangle GetRect() const;
     Vector2 GetPos() const;
     Vector2 GetSize() const;
-
     Vector2 GetCenter() const;
+
+    void SetWeapon(Weapon w);
 
 private:
     void Movement();
